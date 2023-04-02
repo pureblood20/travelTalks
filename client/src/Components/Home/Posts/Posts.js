@@ -3,6 +3,8 @@ import Post from "./Post/Post";
 import { useSelector } from "react-redux";
 import { Grid, CircularProgress } from "@mui/material";
 
+//workng on post
+
 const Posts = () => {
   const { posts, isloading } = useSelector((state) => state.posts);
 
