@@ -20,7 +20,9 @@ const Auth = () => {
   const handleSignIn = () => {
     setIsSignUp((prevState) => !prevState);
   };
-  const handleClick = () => {};
+  const handleClick = () => {
+    console.log("git");
+  };
 
   return (
     <div>
