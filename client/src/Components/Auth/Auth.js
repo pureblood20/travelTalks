@@ -7,12 +7,20 @@ import {
   CssBaseline,
   Paper,
 } from "@mui/material";
+import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import React, { useState } from "react";
 import Input from "./Input";
+import { AUTH_ACTION_TYPE } from "../../store/auth/auth.type";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Auth = () => {
   const [isSignup, setIsSignUp] = useState(false);
   const [showPassword, setshowPassword] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const handleChange = () => {};
   const handleShowPassword = () => {
     setshowPassword((prevPass) => !prevPass);
@@ -22,6 +30,12 @@ const Auth = () => {
   };
   const handleClick = () => {
     console.log("git");
+  };
+  const createOrGetUser = (res) => {
+    const decoded = jwt_decode(res.credential);
+    localStorage.setItem("profile", JSON.stringify(decoded));
+    dispatch({ type: AUTH_ACTION_TYPE.GOOGLE_SIGN_IN, data: decoded });
+    navigate("/");
   };
 
   return (
@@ -128,8 +142,14 @@ const Auth = () => {
                   </Button>
                   <Grid container>
                     <Grid item xs>
+                      {" "}
+                      <br></br>
                       {isSignup ? (
                         <Typography variant="p">
+                          <GoogleLogin
+                            onSuccess={(res) => createOrGetUser(res)}
+                            onError={(err) => console.log(err)}
+                          />
                           Already have an account?
                           <Button
                             variant="text"

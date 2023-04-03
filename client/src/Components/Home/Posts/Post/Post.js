@@ -20,12 +20,8 @@ import { deletePost, likeCount } from "../../../../store/posts/post.action";
 const Post = ({ post }) => {
   const navigate = useNavigate();
   console.log(post.message.length);
-  // let creator = "";
-  // try {
-  //   creator = post.creater.slice(0, 1);
-  // } catch (err) {
-  //   console.log(err);
-  // }
+  let creator = "";
+  creator = post.creater.slice(0, 1);
 
   // const tag = post.tags[0].replace(",", "#");
 
@@ -36,7 +32,7 @@ const Post = ({ post }) => {
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              {post.creater}
+              {creator}
             </Avatar>
           }
           title={post.creater}

@@ -1,4 +1,7 @@
 import { React, useEffect } from "react";
+//google-auth
+import { GoogleOAuthProvider } from "@react-oauth/google";
+
 //routes
 import { Route, Routes } from "react-router-dom";
 //hooks
@@ -18,7 +21,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <GoogleOAuthProvider clientId="1088162561582-l5hgmi4qvv457nfjlbmfpt2g262v6gds.apps.googleusercontent.com">
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
@@ -28,7 +31,7 @@ function App() {
         </Route>
         <Route path="/auth" element={<Auth />} />
       </Routes>
-    </>
+    </GoogleOAuthProvider>
   );
 }
 

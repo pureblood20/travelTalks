@@ -13,11 +13,27 @@ const Onepost = () => {
         {post[0].creater}
       </Typography>
       <center>
+        {/* <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: post[0].selectedFile,
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        > */}
         <CardMedia
           component="img"
           sx={{ width: "auto", height: "auto" }}
           image={post[0].selectedFile}
-          alt="Paella dish"
+          alt="image"
         />
       </center>
       <Typography variant="h3" color="text.primary">
