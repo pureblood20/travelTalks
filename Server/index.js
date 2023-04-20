@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 //include routes
 import postRoute from "./Routes/posts.js";
+import authRoute from "./Routes/auth.js";
 
 const app = Express();
 dotenv.config();
@@ -13,10 +14,10 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/api/v1/posts", postRoute);
+app.use("/api/v1/auth", authRoute);
 
 //connection with port & mongodb
-const CONNECTION_URL =
-  "mongodb+srv://shivani:Shivani%4020@nodeexpressproject.knlpv0w.mongodb.net/TravelTalks";
+
 const PORT = process.env.PORT || 8080;
 const start = () => {
   try {

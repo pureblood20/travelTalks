@@ -12,13 +12,11 @@ export const getPost = async (req, res) => {
 
 export const createPost = async (req, res) => {
   try {
-    const { title, message, creater, tags, selectedFile } = req.body;
+    const post = req.body;
     const createNew = await PostMessage.create({
-      title,
-      message,
-      creater,
-      tags,
-      selectedFile,
+      ...post,
+      creater: req.userId,
+      createdAt: new Date().toISOString(),
     });
     // await createNew.save()
     res.status(201).json(createNew);
@@ -53,13 +51,20 @@ export const deletePost = async (req, res) => {
 export const likePost = async (req, res) => {
   try {
     const { id: _id } = req.params;
-
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+      return res.status(404).send("No post with the above id");
+    }
+    console.log(req.userId);
     const post = await PostMessage.findById(_id);
-    const like = await PostMessage.findByIdAndUpdate(
-      _id,
-      { likeCount: post.likeCount + 1 },
-      { new: true }
-    );
+    const index = post.likeCount.findIndex((id) => id === String(req.userId));
+    if (index === -1) {
+      //like the post
+      post.likeCount.push(req.userId);
+    } else {
+      //dislike a post
+      post.likeCount = post.likeCount.filter((id) => id !== String(req.userId));
+    }
+    const like = await PostMessage.findByIdAndUpdate(_id, post, { new: true });
     res.json(like);
   } catch (error) {
     console.log(error);

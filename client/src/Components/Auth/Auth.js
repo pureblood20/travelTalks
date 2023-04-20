@@ -7,21 +7,31 @@ import {
   CssBaseline,
   Paper,
 } from "@mui/material";
-import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { GoogleLogin } from "@react-oauth/google";
 import React, { useState } from "react";
 import Input from "./Input";
 import { AUTH_ACTION_TYPE } from "../../store/auth/auth.type";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { signin, signup } from "../../store/auth/auth.action";
 
 const Auth = () => {
   const [isSignup, setIsSignUp] = useState(false);
   const [showPassword, setshowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   const handleShowPassword = () => {
     setshowPassword((prevPass) => !prevPass);
   };
@@ -29,11 +39,16 @@ const Auth = () => {
     setIsSignUp((prevState) => !prevState);
   };
   const handleClick = () => {
-    console.log("git");
+    if (isSignup) {
+      // localStorage.setItem("profile", JSON.stringify(formData));
+      dispatch(signup(formData, navigate));
+    } else {
+      dispatch(signin(formData, navigate));
+    }
   };
   const createOrGetUser = (res) => {
     const decoded = jwt_decode(res.credential);
-    localStorage.setItem("profile", JSON.stringify(decoded));
+    // localStorage.setItem("profile", JSON.stringify(decoded));
     dispatch({ type: AUTH_ACTION_TYPE.GOOGLE_SIGN_IN, data: decoded });
     navigate("/");
   };
@@ -97,7 +112,7 @@ const Auth = () => {
                       />{" "}
                       <br></br>
                       <Input
-                        name="lastname"
+                        name="lastName"
                         type="text"
                         label="Last Name"
                         handleChange={handleChange}
@@ -123,7 +138,7 @@ const Auth = () => {
                   {isSignup && (
                     <>
                       <Input
-                        name="confirmpassword"
+                        name="confirmPassword"
                         label=" Repeat Password"
                         handleChange={handleChange}
                         type="password"
@@ -140,16 +155,19 @@ const Auth = () => {
                   >
                     {isSignup ? "SIGN UP" : "SIGN IN"}
                   </Button>
+                  <br></br>
+                  <br></br>
+                  <GoogleLogin
+                    width="270"
+                    onSuccess={(res) => createOrGetUser(res)}
+                    onError={(err) => console.log(err)}
+                  />
                   <Grid container>
                     <Grid item xs>
                       {" "}
                       <br></br>
                       {isSignup ? (
                         <Typography variant="p">
-                          <GoogleLogin
-                            onSuccess={(res) => createOrGetUser(res)}
-                            onError={(err) => console.log(err)}
-                          />
                           Already have an account?
                           <Button
                             variant="text"

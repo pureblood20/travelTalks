@@ -1,8 +1,7 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
+import { Typography, Button } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
-import IconButton from "@mui/material/IconButton";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +11,7 @@ import { AUTH_ACTION_TYPE } from "../../store/auth/auth.type";
 const Header = () => {
   const navigate = useNavigate();
   const { auth } = useSelector((state) => state.auth);
-  const { given_name } = auth;
+  // const { given_name } = auth;
   const dispatch = useDispatch();
 
   const logout = () => {
@@ -29,28 +28,50 @@ const Header = () => {
       <AppBar
         component="nav"
         position="sticky"
-        style={{ background: "#2E3B55" }}
+        elevation={0}
+        style={{ background: "#A9907E", color: "black" }}
       >
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
             TravelTalks
           </Typography>
           <div>
-            {given_name ? (
+            {auth.name ? (
               <Grid>
                 <Typography variant="h6">
-                  {given_name}
-                  <IconButton color="inherit" onClick={() => logout()}>
+                  {auth.name}
+                  <Button
+                    sx={{
+                      bgcolor: "#675D50",
+                      color: "black",
+                      ":hover": {
+                        bgcolor: "#F3DEBA",
+                        color: "black",
+                      },
+                    }}
+                    variant="contained"
+                    onClick={() => logout()}
+                  >
                     LOGOUT
                     <LogoutIcon />
-                  </IconButton>
+                  </Button>
                 </Typography>
               </Grid>
             ) : (
-              <IconButton color="inherit" onClick={() => navigate("/auth")}>
+              <Button
+                sx={{
+                  bgcolor: "#675D50",
+                  ":hover": {
+                    bgcolor: "#A9907E",
+                    color: "white",
+                  },
+                }}
+                variant="contained"
+                onClick={() => navigate("/auth")}
+              >
                 LOGIN
                 <LoginIcon />
-              </IconButton>
+              </Button>
             )}
           </div>
         </Toolbar>

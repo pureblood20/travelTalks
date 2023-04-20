@@ -16,12 +16,12 @@ const Form = () => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
-    creater: "",
     tags: "",
     selectedFile: "",
   });
   const dispatch = useDispatch();
   const post = posts.find((p) => (currentId ? p._id === currentId : null));
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     if (post) {
@@ -32,9 +32,9 @@ const Form = () => {
   const handleClick = (e) => {
     e.preventDefault();
     if (currentId) {
-      dispatch(updatePost(currentId, postData));
+      dispatch(updatePost(currentId, { ...postData, name: user?.name }));
     } else {
-      dispatch(createNewPost(postData));
+      dispatch(createNewPost({ ...postData, name: user?.name }));
     }
     navigate("/");
   };
@@ -44,11 +44,23 @@ const Form = () => {
     setPostData({
       title: "",
       message: "",
-      creater: "",
       tags: "",
       selectedFile: "",
     });
   };
+
+  if (!user?.name) {
+    return (
+      <Typography
+        variant="h1"
+        component="div"
+        align="center"
+        sx={{ flexGrow: 1 }}
+      >
+        Please sign in to add new post
+      </Typography>
+    );
+  }
 
   return (
     <Box
@@ -90,19 +102,6 @@ const Form = () => {
           value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
-          }
-          fullWidth
-        />
-        <br />
-        <br />
-        <TextField
-          required
-          id="outlined-size-small"
-          label="Creater"
-          size="small"
-          value={postData.creater}
-          onChange={(e) =>
-            setPostData({ ...postData, creater: e.target.value })
           }
           fullWidth
         />

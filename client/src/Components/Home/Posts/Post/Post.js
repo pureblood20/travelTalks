@@ -7,7 +7,6 @@ import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -19,19 +18,18 @@ import { deletePost, likeCount } from "../../../../store/posts/post.action";
 
 const Post = ({ post }) => {
   const navigate = useNavigate();
-  console.log(post.message.length);
   let creator = "";
   creator = post.creater.slice(0, 1);
 
-  // const tag = post.tags[0].replace(",", "#");
+  const tag = post.tags[0].replace(",", "#");
 
   const dispatch = useDispatch();
   return (
     <div>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345, borderRadius: "8px" }}>
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            <Avatar sx={{ bgcolor: "#675D50" }} aria-label="recipe">
               {creator}
             </Avatar>
           }
@@ -46,7 +44,7 @@ const Post = ({ post }) => {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            #{post.tags}
+            #{tag}
           </Typography>
 
           <Typography variant="h4" color="text.primary">
@@ -65,7 +63,7 @@ const Post = ({ post }) => {
               dispatch(likeCount(post._id));
             }}
           >
-            <FavoriteIcon />
+            <FavoriteIcon style={{ color: "#675D50" }} />
             {post.likeCount}
           </IconButton>
           <IconButton
@@ -74,7 +72,7 @@ const Post = ({ post }) => {
               dispatch(deletePost(post._id));
             }}
           >
-            <DeleteIcon />
+            <DeleteIcon style={{ color: "#675D50" }} />
           </IconButton>
           <IconButton
             aria-label="edit"
@@ -82,7 +80,7 @@ const Post = ({ post }) => {
               navigate(`editpost/${post._id}`);
             }}
           >
-            <EditIcon />
+            <EditIcon style={{ color: "#675D50" }} />
           </IconButton>
           <IconButton
             aria-label="readmore"
@@ -90,7 +88,7 @@ const Post = ({ post }) => {
               navigate(`viewpost/${post._id}`);
             }}
           >
-            <ReadMoreIcon />
+            <ReadMoreIcon style={{ color: "#675D50" }} />
           </IconButton>
         </CardActions>
       </Card>

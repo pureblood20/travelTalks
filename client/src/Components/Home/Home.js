@@ -27,7 +27,7 @@ const Home = () => {
 
   return (
     <>
-      <Grow in>
+      <Grow in style={{ background: "#F3DEBA" }}>
         <Box>
           <Grid
             container
@@ -43,7 +43,8 @@ const Home = () => {
       </Grow>
       <AppBar
         position="sticky"
-        style={{ background: "#2E3B55" }}
+        elevation={0}
+        style={{ background: "#A9907E" }}
         sx={{ top: "auto", bottom: 0 }}
       >
         <Toolbar>
@@ -51,17 +52,17 @@ const Home = () => {
           <MenuIcon />
         </IconButton> */}
           <StyledFab
-            color="secondary"
+            sx={{ bgcolor: "#675D50" }}
             aria-label="add"
             onClick={() => navigate("/addpost")}
           >
             <AddIcon />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
-          <IconButton color="inherit">
+          <IconButton color="black">
             <SearchIcon />
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton color="black">
             <MoreIcon />
           </IconButton>
         </Toolbar>
