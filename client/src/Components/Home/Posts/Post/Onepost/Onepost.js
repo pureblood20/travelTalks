@@ -10,7 +10,7 @@ const Onepost = () => {
   return (
     <Box sx={{ mr: 20, ml: 20 }}>
       <Typography variant="h2" color="text.primary">
-        {post[0].creater}
+        {post[0].name}
       </Typography>
       <center>
         {/* <Grid
@@ -31,7 +31,7 @@ const Onepost = () => {
         > */}
         <CardMedia
           component="img"
-          sx={{ width: "auto", height: "auto" }}
+          sx={{ maxWidth: 300, maxHeight: 300 }}
           image={post[0].selectedFile}
           alt="image"
         />

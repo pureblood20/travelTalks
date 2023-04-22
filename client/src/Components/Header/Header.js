@@ -10,10 +10,10 @@ import { AUTH_ACTION_TYPE } from "../../store/auth/auth.type";
 
 const Header = () => {
   const navigate = useNavigate();
+
   const { auth } = useSelector((state) => state.auth);
   // const { given_name } = auth;
   const dispatch = useDispatch();
-
   const logout = () => {
     dispatch({ type: AUTH_ACTION_TYPE.GOOGLE_SIGN_OUT });
     navigate("/auth");
@@ -32,14 +32,38 @@ const Header = () => {
         style={{ background: "#A9907E", color: "black" }}
       >
         <Toolbar>
-          <Typography variant="h4" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h4"
+            sx={{
+              flexGrow: 1,
+              "&:hover": {
+                cursor: "pointer",
+              },
+            }}
+            onClick={() => navigate("/")}
+          >
             TravelTalks
           </Typography>
           <div>
             {auth.name ? (
               <Grid>
                 <Typography variant="h6">
-                  {auth.name}
+                  {auth.name} &nbsp;
+                  <Button
+                    sx={{
+                      bgcolor: "#675D50",
+                      color: "black",
+                      ":hover": {
+                        bgcolor: "#F3DEBA",
+                        color: "black",
+                      },
+                    }}
+                    variant="contained"
+                    onClick={() => navigate(`/myprofile/${auth._id}`)}
+                  >
+                    MY PROFILE
+                  </Button>
+                  &nbsp;
                   <Button
                     sx={{
                       bgcolor: "#675D50",
@@ -54,7 +78,7 @@ const Header = () => {
                   >
                     LOGOUT
                     <LogoutIcon />
-                  </Button>
+                  </Button>{" "}
                 </Typography>
               </Grid>
             ) : (
@@ -73,7 +97,7 @@ const Header = () => {
                 <LoginIcon />
               </Button>
             )}
-          </div>
+          </div>{" "}
         </Toolbar>
       </AppBar>
       <Outlet />

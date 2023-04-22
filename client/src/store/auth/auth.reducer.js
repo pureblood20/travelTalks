@@ -25,6 +25,8 @@ export const auth = (state = initialState, action) => {
     // case AUTH_ACTION_TYPE.SIGN_IN:
     // case AUTH_ACTION_TYPE.SIGN_UP:
     //   return { ...state, auth: [...state.auth, action.payload] };
+    case AUTH_ACTION_TYPE.MY_PROFILE:
+      return { ...state };
     default:
       return state;
   }

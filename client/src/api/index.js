@@ -7,7 +7,6 @@ API.interceptors.request.use((req) => {
     req.headers.Authorization = `Bearer ${JSON.parse(
       localStorage.getItem("token")
     )}`;
-    console.log("vvsvs");
   }
   return req;
 });
@@ -24,3 +23,4 @@ export const getOnePost = (id) => API.get(`/posts/${id}`);
 // const url2 = "http://localhost:8080/api/v1/auth";
 export const signIn = (user) => API.post(`/auth/signin`, user);
 export const signUp = (user) => API.post(`/auth/signup`, user);
+export const myprofile = (id) => API.get(`/auth/${id}`);

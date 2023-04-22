@@ -19,7 +19,7 @@ import { deletePost, likeCount } from "../../../../store/posts/post.action";
 const Post = ({ post }) => {
   const navigate = useNavigate();
   let creator = "";
-  creator = post.creater.slice(0, 1);
+  creator = post.name.slice(0, 1).toUpperCase();
 
   const tag = post.tags[0].replace(",", "#");
 
@@ -33,7 +33,7 @@ const Post = ({ post }) => {
               {creator}
             </Avatar>
           }
-          title={post.creater}
+          title={post.name}
           subheader={<Moment fromNow>{post.createdAt}</Moment>}
         />
         <CardMedia
@@ -64,7 +64,7 @@ const Post = ({ post }) => {
             }}
           >
             <FavoriteIcon style={{ color: "#675D50" }} />
-            {post.likeCount}
+            {post.likeCount.length}
           </IconButton>
           <IconButton
             aria-label="delete"

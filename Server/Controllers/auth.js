@@ -60,3 +60,14 @@ export const signUp = async (req, res) => {
     console.log("error in sign up", error);
   }
 };
+
+export const getMyProfile = async (req, res) => {
+  try {
+    const { id: _id } = req.params;
+    console.log("feasaaf");
+    const mypro = await Auth.findOne(_id);
+    res.json(mypro);
+  } catch (error) {
+    console.log(error);
+  }
+};

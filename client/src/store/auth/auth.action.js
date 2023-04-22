@@ -31,3 +31,10 @@ export const signup = (user, navigate) => async (dispatch) => {
     navigate("/");
   } catch (error) {}
 };
+
+export const myprofile = (id) => async (dispatch) => {
+  try {
+    const { data } = api.myprofile(id);
+    dispatch({ type: AUTH_ACTION_TYPE.MY_PROFILE, payload: data });
+  } catch (error) {}
+};

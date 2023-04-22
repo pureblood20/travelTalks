@@ -6,7 +6,6 @@ export const getAllPosts = () => async (dispatch) => {
     dispatch({ type: POST_ACTION_TYPE.FETCH_ALL_START });
 
     const { data } = await api.fetchPosts();
-    console.log("hello");
     dispatch({ type: POST_ACTION_TYPE.FETCH_ALL_SUCCESS, payload: data });
   } catch (error) {
     console.log(error);
