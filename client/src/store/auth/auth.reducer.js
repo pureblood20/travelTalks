@@ -8,7 +8,7 @@ const initialState = {
   isloading: false,
   alert: "",
 };
-console.log(initialState);
+
 export const auth = (state = initialState, action) => {
   switch (action.type) {
     case AUTH_ACTION_TYPE.GOOGLE_SIGN_IN:

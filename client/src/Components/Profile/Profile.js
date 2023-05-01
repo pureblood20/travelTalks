@@ -5,6 +5,8 @@ import { Typography, Box } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 
 const Profile = () => {
+  const { currentId } = useParams();
+  console.log(currentId);
   const { auth } = useSelector((state) => state.auth);
   console.log("fcawf", auth);
   return (

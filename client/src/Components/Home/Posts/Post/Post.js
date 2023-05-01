@@ -34,6 +34,10 @@ const Post = ({ post }) => {
             </Avatar>
           }
           title={post.name}
+          onClick={() => {
+            console.log(post.creater);
+            navigate(`/myprofile/${post.creater}`);
+          }}
           subheader={<Moment fromNow>{post.createdAt}</Moment>}
         />
         <CardMedia

@@ -12,12 +12,14 @@ const Header = () => {
   const navigate = useNavigate();
 
   const { auth } = useSelector((state) => state.auth);
+  // const { token } = useSelector((state) => state.token);
   // const { given_name } = auth;
   const dispatch = useDispatch();
   const logout = () => {
     dispatch({ type: AUTH_ACTION_TYPE.GOOGLE_SIGN_OUT });
     navigate("/auth");
   };
+
   /*   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("profile")));
     console.log("kjbkjjkjk");
