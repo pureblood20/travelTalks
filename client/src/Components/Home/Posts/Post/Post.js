@@ -8,13 +8,11 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import Moment from "react-moment";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deletePost, likeCount } from "../../../../store/posts/post.action";
+import { likeCount } from "../../../../store/posts/post.action";
 
 const Post = ({ post }) => {
   const navigate = useNavigate();
@@ -34,10 +32,6 @@ const Post = ({ post }) => {
             </Avatar>
           }
           title={post.name}
-          onClick={() => {
-            console.log(post.creater);
-            navigate(`/myprofile/${post.creater}`);
-          }}
           subheader={<Moment fromNow>{post.createdAt}</Moment>}
         />
         <CardMedia
@@ -70,24 +64,10 @@ const Post = ({ post }) => {
             <FavoriteIcon style={{ color: "#675D50" }} />
             {post.likeCount.length}
           </IconButton>
-          <IconButton
-            aria-label="delete"
-            onClick={() => {
-              dispatch(deletePost(post._id));
-            }}
-          >
-            <DeleteIcon style={{ color: "#675D50" }} />
-          </IconButton>
-          <IconButton
-            aria-label="edit"
-            onClick={() => {
-              navigate(`editpost/${post._id}`);
-            }}
-          >
-            <EditIcon style={{ color: "#675D50" }} />
-          </IconButton>
+
           <IconButton
             aria-label="readmore"
+            sx={{ marginLeft: "auto" }}
             onClick={() => {
               navigate(`viewpost/${post._id}`);
             }}

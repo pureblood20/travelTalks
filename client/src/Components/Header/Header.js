@@ -61,6 +61,21 @@ const Header = () => {
                       },
                     }}
                     variant="contained"
+                    onClick={() => navigate(`/myposts/${auth._id}`)}
+                  >
+                    MY POSTS
+                  </Button>
+                  &nbsp;
+                  <Button
+                    sx={{
+                      bgcolor: "#675D50",
+                      color: "black",
+                      ":hover": {
+                        bgcolor: "#F3DEBA",
+                        color: "black",
+                      },
+                    }}
+                    variant="contained"
                     onClick={() => navigate(`/myprofile/${auth._id}`)}
                   >
                     MY PROFILE

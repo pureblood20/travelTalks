@@ -38,7 +38,11 @@ export const posts = (state = initialState, action) => {
         posts: [...state.posts.filter((post) => post._id !== action.payload)],
       };
     case POST_ACTION_TYPE.FETCH_ONE_POST:
-      console.log(action.payload);
+      return {
+        ...state,
+        posts: action.payload,
+      };
+    case POST_ACTION_TYPE.FETCH_MY_POSTS:
       return {
         ...state,
         posts: action.payload,

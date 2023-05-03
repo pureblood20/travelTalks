@@ -9,32 +9,35 @@ const Posts = () => {
   const { posts, isloading } = useSelector((state) => state.posts);
   const user = JSON.parse(localStorage.getItem("profile"));
   return (
-    <div>
+    <section>
+      {!user?.name && (
+        <Typography
+          variant="h6"
+          component="div"
+          align="left"
+          sx={{ flexGrow: 1, margin: "2rem" }}
+        >
+          Please sign in to like posts.
+        </Typography>
+      )}
       {isloading ? (
         <CircularProgress />
       ) : (
-        <Grid minWidth={200} container spacing={4} sx={{ my: 4 }}>
-          {posts.length === 0 ? (
-            <h1>No posts</h1>
-          ) : !user?.name ? (
-            <Typography
-              variant="h6"
-              component="div"
-              align="center"
-              sx={{ flexGrow: 1 }}
-            >
-              Please sign in to view posts.
-            </Typography>
-          ) : (
-            posts.map((post) => (
-              <Grid item minWidth={300} xs={12} sm={6} md={4} key={post._id}>
-                <Post post={post}></Post>
-              </Grid>
-            ))
-          )}
-        </Grid>
+        <div style={{ margin: "2rem" }}>
+          <Grid minWidth={200} container spacing={4}>
+            {posts.length === 0 ? (
+              <h1>No posts</h1>
+            ) : (
+              posts.map((post) => (
+                <Grid item minWidth={300} xs={12} sm={6} md={4} key={post._id}>
+                  <Post post={post}></Post>
+                </Grid>
+              ))
+            )}
+          </Grid>
+        </div>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -7,4 +7,5 @@ export const POST_ACTION_TYPE = {
   DELETE_POST: "posts/delete",
   LIKE_COUNT: "posts/likecount",
   FETCH_ONE_POST: "posts/getOnePost",
+  FETCH_MY_POSTS: "posts/getMyPost",
 };

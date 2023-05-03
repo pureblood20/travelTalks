@@ -10,6 +10,19 @@ export const getPost = async (req, res) => {
   }
 };
 
+export const getMyPost = async (req, res) => {
+  try {
+    const { id: creator_id } = req.params;
+    const query = {
+      creater: creator_id,
+    };
+    const post = await PostMessage.find(query);
+    res.json(post);
+  } catch (error) {
+    console.log("error in getMyPost", error);
+  }
+};
+
 export const createPost = async (req, res) => {
   try {
     const post = req.body;

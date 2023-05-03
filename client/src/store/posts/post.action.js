@@ -41,12 +41,25 @@ export const likeCount = (id) => async (dispatch) => {
   try {
     const { data } = await api.likeCount(id);
     dispatch({ type: POST_ACTION_TYPE.LIKE_COUNT, payload: data });
-  } catch {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getOnePost = (id) => async (dispatch) => {
   try {
     const { data } = await api.getOnePost(id);
     dispatch({ type: POST_ACTION_TYPE.FETCH_ONE_POST, payload: data });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMyPost = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.getMyPost(id);
+    dispatch({ type: POST_ACTION_TYPE.FETCH_MY_POSTS, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
 };

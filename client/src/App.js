@@ -14,6 +14,7 @@ import Form from "./Components/Form/Form";
 import Onepost from "./Components/Home/Posts/Post/Onepost/Onepost";
 import Auth from "./Components/Auth/Auth";
 import Profile from "./Components/Profile/Profile";
+import { Myposts } from "./Components/MyPosts/Myposts";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
           <Route path="editpost/:currentId" element={<Form />} />
           <Route path="viewpost/:currentId" element={<Onepost />} />
           <Route path="myprofile/:currentId" element={<Profile />} />
+          <Route path="myposts/:currentId" element={<Myposts />} />
         </Route>
         <Route path="/auth" element={<Auth />} />
       </Routes>

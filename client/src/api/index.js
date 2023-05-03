@@ -19,6 +19,7 @@ export const editPost = (id, editedPost) =>
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const likeCount = (id) => API.patch(`/posts/${id}/likepost`);
 export const getOnePost = (id) => API.get(`/posts/${id}`);
+export const getMyPost = (id) => API.get(`/posts/mypost/${id}`);
 
 // const url2 = "http://localhost:8080/api/v1/auth";
 export const signIn = (user) => API.post(`/auth/signin`, user);
